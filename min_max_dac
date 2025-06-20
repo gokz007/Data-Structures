@@ -1,0 +1,43 @@
+#include <stdio.h>  
+int t=0;  
+void min_max(int a[], int i, int j, int *min, int *max) {  
+    int mid, min1, max1, min2, max2;  
+    if (i == j) {  
+        *min = *max = a[i];  
+        t=t+3;  
+    }  
+    else if (i == j - 1) {  
+     t=t+2;  
+        if (a[i] < a[j]) {  
+            *min = a[i];  
+            *max = a[j];  
+            t=t+3;  
+        } else {  
+            *min = a[j];  
+            *max = a[i];  
+       t=t+2;  
+        }  
+    }  
+    else {  
+        mid = (i + j) / 2;  
+        t=t=3;  
+        min_max(a, i, mid, &min1, &max1);  
+        min_max(a, mid + 1, j, &min2, &max2);  
+  
+        *min = (min1 < min2) ? min1 : min2;  
+        *max = (max1 > max2) ? max1 : max2;  
+    }  
+}  
+int main() {  
+    int a[100], n, i, min, max;  
+    printf("Enter number of elements: ");  
+    scanf("%d", &n);  
+    printf("Enter array elements:\n");  
+    for (i = 0; i < n; i++)  
+        scanf("%d", &a[i]);  
+    min_max(a, 0, n - 1, &min, &max);  
+    printf("Minimum element: %d\n", min);  
+    printf("Maximum element: %d\n", max);  
+printf("Time taken :%d",t);  
+    return 0;  
+} 
